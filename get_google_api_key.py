@@ -17,7 +17,6 @@ def create_api_key(project_id: str, suffix: str, google_application_credentials)
     request.key = key
 
     response = client.create_key(request=request).result()
-    print(f"Successfully created an API key: {response.name}")
 
     return response
 
@@ -26,4 +25,5 @@ if __name__ == '__main__':
     env = Env()
     env.read_env()
     google_application_credentials = env('GOOGLE_APPLICATION_CREDENTIALS')
-    create_api_key('verb-helper', 'Verb Helper API Key', google_application_credentials)
+    api_key = create_api_key('verb-helper', 'Verb Helper API Key', google_application_credentials)
+    print(f"Successfully created an API key: {api_key.name}")

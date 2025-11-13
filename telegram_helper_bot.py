@@ -1,5 +1,5 @@
 from environs import Env
-from utils import detect_intent_texts, setup_logging, create_session_id
+from utils import detect_intent_texts, setup_logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 
@@ -11,11 +11,10 @@ def start(update, context):
 def handle_user_message(update, context):
     user_text = update.message.text
     chat_id = update.message.chat.id
-    session_id = create_session_id("tg", chat_id)
 
     query_result = detect_intent_texts(
         project_id='verb-helper',
-        session_id=session_id,
+        session_id=f'tg-{chat_id}',
         texts=[user_text],
         language_code="ru"
     )

@@ -3,16 +3,14 @@ import telegram
 import vk_api as vk
 
 from environs import Env
-from utils import detect_intent_texts, setup_logging, create_session_id
+from utils import detect_intent_texts, setup_logging
 from vk_api.longpoll import VkLongPoll, VkEventType
 
 
 def handle_user_message(event, vk_api):
-    session_id = create_session_id("vk", event.user_id)
-
     dialogflow_response = detect_intent_texts(
         project_id='verb-helper',
-        session_id=session_id,
+        session_id=f'vk-{event.user_id}',
         texts=[event.text],
         language_code='ru'
     )

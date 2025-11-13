@@ -43,6 +43,3 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
 
     return response.query_result
 
-
-def create_session_id(platform, user_id):
-    return f"{platform}-{user_id}"
